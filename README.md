@@ -1,6 +1,8 @@
 Setup instructions:
 
 [Windows]
+
+
 0) Download the application and unzip it to where you want to host it.
 	0a) Ex: If you are using XAMPP, extract to your XAMPP installation's htdocs folder. 
 1) Ensure that PHP (7+) is installed and can be run from the command line.
