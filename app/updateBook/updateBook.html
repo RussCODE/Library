@@ -1,0 +1,31 @@
+<div ng-controller="updateBookCtrl" data-ng-init="onLoad()">
+    <div id = "updateBookContainer" style="margin-right:2vw">
+        <h1 style="margin-top:1vw; margin-left:1vw;">Update Book Information</h1>
+        <form>
+            <ul class="form-style-1" style="text-align: right; margin-left: -1vw">
+                <li>Title:
+                    <input type="text" id="titleForm" name="Title" required/>
+                </li>
+                <li>Status:
+                <select id="statusForm" name="Status" style="width: 194px;" value="" required>
+                    <option value="Available">Available</option>
+                    <option value="On Hold">On Hold</option>
+                    <option value="Checked Out">Checked Out</option>
+                    <option value="SuspendedT">Suspended (Temporarily)</option>
+                    <option value="SuspendedP">Suspended (Permanently)</option>
+                </select><br/>
+                </li>
+                <li>Book Holder:
+                    <input type="text" id="holderName" name="Holder"/>
+                </li>
+                <li style="margin-bottom: 1vw;">Checkout Date:
+                    <input type="text" id="checkoutDate" readonly name="Checkout Date" style="user-select: none;"/>
+                </li>
+                <input type="submit" value="Return to books" class="button button1" ng-model="btn" name="UserButton"
+                       ng-click="returnHome()" formnovalidate/>
+                <input type="submit" value="Update book" class="button button1" ng-model="btn" name="UserButton"
+                       ng-click="updateBook()"/>
+            </ul>
+        </form>
+    </div>
+</div>
