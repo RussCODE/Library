@@ -18,19 +18,24 @@ $scope.onLoad = function onLoad()
 
     statusForm.addEventListener("change", function ()
     {
-        if (statusForm.selectedIndex == 1 || statusForm.selectedIndex == 2) {
-            holderForm.disabled = false;
-            checkoutDate.disabled = false;
-        }
-        else {
-            holderForm.disabled = true;
-            holderForm.value = "";
-            checkoutDate.disabled = true;
-            checkoutDate.value = "";
-        }
+        $scope.disableForms(checkoutDate, holderForm);
     }, false);
+
+    $scope.disableForms(checkoutDate, holderForm);
 };
 
+$scope.disableForms = function disableForms(checkoutDate, holderForm) {
+    if (statusForm.selectedIndex == 1 || statusForm.selectedIndex == 2) {
+        holderForm.disabled = false;
+        checkoutDate.disabled = false;
+    }
+    else {
+        holderForm.disabled = true;
+        holderForm.value = "";
+        checkoutDate.disabled = true;
+        checkoutDate.value = "";
+    }
+};
 
 $scope.updateBook = function updateBook()
 {

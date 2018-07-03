@@ -6,7 +6,7 @@
   "repository": "https://github.com/angular/angular-seed",
   "license": "MIT",
   "devDependencies": {
-    "bower": "^1.7.7",
+    "bower": "^1.8.4",
     "http-server": "^0.9.0",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "angular-scrollable-table": "^1.1.2",
-    "bootstrap": "^4.1.1"
+    "bootstrap": "^4.1.1",
+    "express": "4.16.3"
   }
 }

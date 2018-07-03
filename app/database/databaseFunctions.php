@@ -17,7 +17,7 @@ function createConn()
 	$servername = $config["servername"];
 	$username = $config["user"];
 	$password = $config["pass"];
-	$database = "library";
+	$database = "heroku_0af4ac1c4ff36c5";
 	
 	//Create connection
 	$conn = new mysqli($servername, $username, $password, $database);
