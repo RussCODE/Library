@@ -1,13 +1,7 @@
 'use strict';
 
-angular.module('libraryApp').controller('addBookCtrl', ['$scope', '$window', function($scope, $window)
+angular.module('libraryApp').controller('addBookCtrl', ['$rootScope', '$scope', '$state', function($scope, $state, $rootScope)
 {
-
-$scope.returnHome = function returnHome()
-{
-    $window.location.href = "../app/#!/";
-    return false;
-};
 
 $scope.addBook = function addBook()
 {

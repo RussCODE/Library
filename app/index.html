@@ -23,6 +23,7 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/ui-router/angular-ui-router.js"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
   <script src="app.js"></script>
@@ -34,6 +35,7 @@
 <body ng-controller="libraryCtrl">
 
   <div ng-view class="ngview-container"></div>
+  <div ui-view="modal"></div>
 
 </body>
 </html>
