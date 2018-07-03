@@ -13,7 +13,7 @@ $scope.onLoad = function onLoad()
     var checkoutDate = document.getElementById("checkoutDate");
     checkoutDate.value = $rootScope.getCookie("timestamp").replace("NULL", "");
     checkoutDate.addEventListener("click", function () {
-        $("#checkoutDate").datepicker().focus();
+        $("#checkoutDate").datepicker({ maxDate: new Date }).focus();
     }, false);
 
     statusForm.addEventListener("change", function ()

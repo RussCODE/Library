@@ -134,11 +134,21 @@ function addBookRemote($args)
 }//end addBookRemote
 
 //-------------------------------------------------------------------------
+// deleteBookRemote
+//-------------------------------------------------------------------------
+function deleteBookRemote($args) 
+{
+	header("Content-Type: application/json; charset=UTF-8");
+	$args = json_decode($args, false);
+	deleteBook($args->id);
+	
+}//end deleteBookRemote
+
+//-------------------------------------------------------------------------
 // deleteBook
 //-------------------------------------------------------------------------
 function deleteBook($id) 
 {
-	//Not implemented in app as per spec
 	$conn = createConn();
 	
 	$sql = "DELETE FROM Books WHERE id = ?";
@@ -244,7 +254,7 @@ function getBooks()
 function handleRequest() 
 {
 	$functName = $_REQUEST['fxn'];
-	$validFunctions = array("getBooks", "addBookRemote", "updateBookRemote");
+	$validFunctions = array("getBooks", "addBookRemote", "updateBookRemote", "deleteBookRemote");
 	
 	if(in_array($functName, $validFunctions))
 	{

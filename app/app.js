@@ -108,6 +108,7 @@ config(['$locationProvider', '$routeProvider', '$stateProvider', function($locat
         var book;
         var btnId;
         var updateBtn;
+        var deleteBtn;
         var status;
         for (var i = 0; i < $rootScope.books.length; i++)
         {
@@ -115,8 +116,9 @@ config(['$locationProvider', '$routeProvider', '$stateProvider', function($locat
             status = getStatus(book.statusCode);
             btnId = "btn" + book.id;
             updateBtn = book.statusCode != 4 ? "<button id=" + btnId + " class='button button1'>Update Book</button>" : "";
+            deleteBtn = "<button id=del" + btnId + " class='button button1'>Delete Book</button>";
             $rootScope.table.row.add([book.id, book.title, status, book.statusCode,
-                book.book_holder.replace("NULL", ""), book.date_check_out.replace("NULL", ""), updateBtn]).draw(false);
+                book.book_holder.replace("NULL", ""), book.date_check_out.replace("NULL", ""), updateBtn, deleteBtn]).draw(false);
 
             if (updateBtn !== "")
             {
@@ -132,8 +134,33 @@ config(['$locationProvider', '$routeProvider', '$stateProvider', function($locat
                     $state.go("Modal.updateBook");
                 }, false);
             }
+
+            document.getElementById("del" + btnId).addEventListener("click", function buttonClicked()
+            {
+                const id = this.id.substring(6);
+                deleteBook(id);
+            }, false);
         }
     };
+
+    function deleteBook(id)
+    {
+        var args = { "id": id };
+        args = JSON.stringify(args);
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function ()
+        {
+            if (this.readyState === 4 && this.status === 200)
+            {
+                swal("Book Deleted Successfully!", "", "success").then(function()
+                {
+                    $rootScope.returnHome();
+                });
+            }
+        };
+        xmlhttp.open("POST", "database/databaseFunctions.php?fxn=deleteBookRemote&args="+args, true);
+        xmlhttp.send();
+    }
 
     function setCookies(bookInfo)
     {
