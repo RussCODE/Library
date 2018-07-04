@@ -35,14 +35,14 @@ $scope.onLoad = function onLoad()
 $scope.disableForms = function disableForms() {
     if (statusForm.selectedIndex > 0 && statusForm.selectedIndex < 3) {
         checkoutDate.disabled = false;
-        checkoutDate.required = true;
         ownerForm.disabled = false;
-        ownerForm.required = true;
         if (statusForm.selectedIndex == 2)
         {
             holderForm.disabled = true;
             holderForm.required = false;
             holderForm.value = "";
+            ownerForm.required = true;
+            checkoutDate.required = true;
         }
         else
         {

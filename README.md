@@ -103,9 +103,8 @@ Check-In (library customer returns book)
 		
 		b) Click the "Status" dropdown and select the new book status (E.g., Available) on the dropdown
 		
-		d) Click the "Update book" button on the modal window.
-
-		//TODO: FIX
+		c) Click the "Update book" button on the modal window.
+		
 
 Add Hold (library customer places hold on book currently checked-out)
 
@@ -117,6 +116,10 @@ Add Hold (library customer places hold on book currently checked-out)
 		
 		c) Add the name of the customer holding the book to the "Book Holder" text field
 		
+		c) Ensure that the name of the customer who checked out the book is in the "Checked out By" text field
+		
+		d) Ensure that the date of checkout is correct.
+		
 		d) Click the "Update book" button on the modal window.
 
 
@@ -126,11 +129,6 @@ Remove Hold (library customer cancels hold or checks-out held book)
 	
 		a) Click the "Update book" button on the row of the book you wish to check out
 		
-		b) Click the "Status" dropdown and select "On Hold" on the dropdown
+		b) Click the "Status" dropdown and select the new status (E.g., Checked Out)
 		
-		c) Add the name of the customer holding the book to the "Book Holder" text field
-		
-		d) Click the "Update book" button on the modal window.
-
-
-
+		c) Click the "Update book" button on the modal window.
