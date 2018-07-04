@@ -51,8 +51,7 @@ function initDatabase()
 	echo "\r\nBegin Database Initialization \r\n";
 	
 	// Create database if not present
-	$sql = "
-	DROP TABLE Books; CREATE DATABASE IF NOT EXISTS Library;";
+	$sql = "CREATE DATABASE IF NOT EXISTS Library;";
 	if ($conn->query($sql) !== TRUE) {
 		echo "Error creating database: " . $conn->error;
 		return;
@@ -184,7 +183,7 @@ function updateBook($id, $title, $date_check_out, $book_holder, $book_owner, $st
 	
 	$sql = "UPDATE Books SET title = ?, date_check_out = ?, book_holder = ?, book_owner = ?, book_status = ? WHERE id = ?";
 	$statement = $conn->prepare($sql);
-	$statement->bind_param("sssii", $title, $date_check_out, $book_holder, $book_owner, $statusCode, $id);
+	$statement->bind_param("ssssii", $title, $date_check_out, $book_holder, $book_owner, $statusCode, $id);
 
 	if ($statement->execute()) 
 	{
@@ -229,8 +228,8 @@ function getBooks()
 			$title = $row[1] !== NULL ? $row[1] : "NULL";
 			$date_check_out = $row[2] !== NULL ? $row[2] : "NULL";
 			$book_holder = $row[3] !== NULL ? $row[3] : "NULL";
-			$book_owner = $row[4] !== NULL ? $row[4] : "NULL";
-			$statusCode = $row[5] !== NULL ? $row[5] : "NULL";
+			$book_owner = $row[5] !== NULL ? $row[5] : "NULL";
+			$statusCode = $row[4] !== NULL ? $row[4] : "NULL";
 			
 			array_push($books, array(
 			'id' => $id, 
@@ -270,7 +269,6 @@ function handleRequest()
 	}	
 } //End handleRequest	
 
-initDatabase();
 handleRequest();
 	
 ?>

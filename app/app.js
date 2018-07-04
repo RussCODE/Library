@@ -118,7 +118,7 @@ config(['$locationProvider', '$routeProvider', '$stateProvider', function($locat
             updateBtn = book.statusCode != 4 ? "<button id=" + btnId + " class='button button1'>Update Book</button>" : "";
             deleteBtn = "<button id=del" + btnId + " class='button button1'>Delete Book</button>";
             $rootScope.table.row.add([book.id, book.title, status, book.statusCode,
-                book.book_holder.replace("NULL", ""),  book.book_holder.replace("NULL", ""),
+                book.book_holder.replace("NULL", ""),  book.book_owner.replace("NULL", ""),
                 book.date_check_out.replace("NULL", ""), updateBtn, deleteBtn]).draw(false);
 
             if (updateBtn !== "")
@@ -142,6 +142,7 @@ config(['$locationProvider', '$routeProvider', '$stateProvider', function($locat
                 deleteBook(id);
             }, false);
         }
+        $('#booksTable').show();
     };
 
     function deleteBook(id)

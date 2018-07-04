@@ -2,17 +2,23 @@
 
 angular.module('libraryApp').controller('updateBookCtrl', ['$scope', '$rootScope', function($scope, $rootScope)
 {
+    var titleForm;
+    var holderForm;
+    var ownerForm;
+    var statusForm;
+    var checkoutDate;
 
 $scope.onLoad = function onLoad()
 {
-    document.getElementById("titleForm").value = $rootScope.getCookie("title");
-    var holderForm = document.getElementById("holderName");
+    titleForm = document.getElementById("titleForm");
+    titleForm.value = $rootScope.getCookie("title");
+    holderForm = document.getElementById("holderName");
     holderForm.value = $rootScope.getCookie("holder").replace("NULL", "");
-    var ownerForm = document.getElementById("ownerName");
+    ownerForm = document.getElementById("ownerName");
     ownerForm.value = $rootScope.getCookie("owner").replace("NULL", "");
-    var statusForm = document.getElementById("statusForm");
+    statusForm = document.getElementById("statusForm");
     statusForm.selectedIndex = $rootScope.getCookie("statusCode");
-    var checkoutDate = document.getElementById("checkoutDate");
+    checkoutDate = document.getElementById("checkoutDate");
     checkoutDate.value = $rootScope.getCookie("timestamp").replace("NULL", "");
     checkoutDate.addEventListener("click", function () {
         $("#checkoutDate").datepicker({ maxDate: new Date }).focus();
@@ -23,24 +29,46 @@ $scope.onLoad = function onLoad()
         $scope.disableForms(checkoutDate, holderForm);
     }, false);
 
-    $scope.disableForms(checkoutDate, holderForm);
+    $scope.disableForms();
 };
 
-$scope.disableForms = function disableForms(checkoutDate, holderForm) {
-    if (statusForm.selectedIndex == 1 || statusForm.selectedIndex == 2) {
-        holderForm.disabled = false;
+$scope.disableForms = function disableForms() {
+    if (statusForm.selectedIndex > 0 && statusForm.selectedIndex < 3) {
         checkoutDate.disabled = false;
+        checkoutDate.required = true;
+        ownerForm.disabled = false;
+        ownerForm.required = true;
+        if (statusForm.selectedIndex == 2)
+        {
+            holderForm.disabled = true;
+            holderForm.required = false;
+            holderForm.value = "";
+        }
+        else
+        {
+            holderForm.disabled = false;
+            holderForm.required = true;
+        }
     }
     else {
         holderForm.disabled = true;
+        holderForm.required = false;
         holderForm.value = "";
         checkoutDate.disabled = true;
+        checkoutDate.required = false;
         checkoutDate.value = "";
+        ownerForm.disabled = true;
+        ownerForm.required = false;
+        ownerForm.value = "";
     }
 };
 
 $scope.updateBook = function updateBook()
 {
+    if (!validateForm())
+    {
+        return;
+    }
     const title = document.getElementById("titleForm").value;
     //Index position on dropdown corresponds to status codes
     const status = document.getElementById("statusForm").selectedIndex;
@@ -65,5 +93,29 @@ $scope.updateBook = function updateBook()
     xmlhttp.open("POST", "database/databaseFunctions.php?fxn=updateBookRemote&args="+args, true);
     xmlhttp.send();
 };
+
+function validateForm()
+{
+    const statusCode = statusForm.selectedIndex;
+    var isValid = titleForm != "";
+
+    if (statusForm.selectedIndex > 0 && statusForm.selectedIndex < 3)
+    {
+        isValid = isValid && ownerForm.value != "" && checkoutDate.value != "";
+        if (statusForm.selectedIndex == 1)
+        {
+            return isValid && holderForm.value != "";
+        }
+        else
+        {
+            return isValid;
+        }
+    }
+    else
+    {
+        return isValid;
+    }
+
+}
 
 }]);
