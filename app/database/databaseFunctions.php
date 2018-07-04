@@ -51,7 +51,8 @@ function initDatabase()
 	echo "\r\nBegin Database Initialization \r\n";
 	
 	// Create database if not present
-	$sql = "CREATE DATABASE IF NOT EXISTS Library;";
+	$sql = "
+	DROP TABLE Books; CREATE DATABASE IF NOT EXISTS Library;";
 	if ($conn->query($sql) !== TRUE) {
 		echo "Error creating database: " . $conn->error;
 		return;
@@ -83,6 +84,7 @@ function initDatabase()
 		title VARCHAR(50) NOT NULL,
 		date_check_out DATE NULL,
 		book_holder VARCHAR(50),
+		book_owner VARCHAR(50),
 		book_status INT UNSIGNED
 		);";
 
@@ -102,13 +104,13 @@ function initDatabase()
 //-------------------------------------------------------------------------
 // addBook
 //-------------------------------------------------------------------------
-function addBook($title, $date_check_out, $book_holder, $book_status) 
+function addBook($title, $date_check_out, $book_holder, $book_owner, $book_status) 
 {
 	$conn = createConn();
 	
-	$sql = "INSERT INTO Books (title, date_check_out, book_holder, book_status) VALUES (?, ?, ?, ?)";
+	$sql = "INSERT INTO Books (title, date_check_out, book_holder, book_owner, book_status) VALUES (?, ?, ?, ?)";
 	$statement = $conn->prepare($sql);
-	$statement->bind_param("sssi", $title, $date_check_out, $book_holder, $book_status);
+	$statement->bind_param("ssssi", $title, $date_check_out, $book_holder, $book_owner, $book_status);
 	
 	if ($statement->execute()) 
 	{
@@ -176,13 +178,13 @@ function deleteBook($id)
 // 3: Book temporarily suspended
 // 4: Book permanently suspended
 //-------------------------------------------------------------------------
-function updateBook($id, $title, $date_check_out, $book_holder, $statusCode) 
+function updateBook($id, $title, $date_check_out, $book_holder, $book_owner, $statusCode) 
 {
 	$conn = createConn();
 	
-	$sql = "UPDATE Books SET title = ?, date_check_out = ?, book_holder = ?, book_status = ? WHERE id = ?";
+	$sql = "UPDATE Books SET title = ?, date_check_out = ?, book_holder = ?, book_owner = ?, book_status = ? WHERE id = ?";
 	$statement = $conn->prepare($sql);
-	$statement->bind_param("sssii", $title, $date_check_out, $book_holder, $statusCode, $id);
+	$statement->bind_param("sssii", $title, $date_check_out, $book_holder, $book_owner, $statusCode, $id);
 
 	if ($statement->execute()) 
 	{
@@ -203,7 +205,7 @@ function updateBookRemote($args)
 	header("Content-Type: application/json; charset=UTF-8");
 	$args = json_decode($args, false);
 	$date = $args->day != "" ? date("Y-m-d", strtotime($args->day)) : NULL;
-	updateBook($args->id, $args->title, $date, $args->holder, $args->status);
+	updateBook($args->id, $args->title, $date, $args->holder, $args->owner, $args->status);
 	
 }//end updateBookRemote
 
@@ -227,13 +229,15 @@ function getBooks()
 			$title = $row[1] !== NULL ? $row[1] : "NULL";
 			$date_check_out = $row[2] !== NULL ? $row[2] : "NULL";
 			$book_holder = $row[3] !== NULL ? $row[3] : "NULL";
-			$statusCode = $row[4] !== NULL ? $row[4] : "NULL";
+			$book_owner = $row[4] !== NULL ? $row[4] : "NULL";
+			$statusCode = $row[5] !== NULL ? $row[5] : "NULL";
 			
 			array_push($books, array(
 			'id' => $id, 
 			'title' => $title, 
 			'date_check_out' => $date_check_out, 
 			'book_holder' => $book_holder, 
+			'book_owner' => $book_owner, 
 			'statusCode' => $statusCode));
 		}
 		echo json_encode($books);
@@ -266,6 +270,7 @@ function handleRequest()
 	}	
 } //End handleRequest	
 
+initDatabase();
 handleRequest();
 	
 ?>

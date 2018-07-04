@@ -1,30 +1,136 @@
-Setup instructions:
+Usage Instructions:
 
-[Windows]
+URL: http://galib.herokuapp.com
+
+Functionality:
+
+View Book Status
+	Books will have one of the following status labels:
+		Available (0)
+		On Hold (1)
+		Checked Out (2)
+		Temporarily Suspended (3)
+		Permenantly Suspended (4)
+
+	You can view a book's status on the Library Administration Page.
+	You can search for a book and it's status by typing a title or status into the search box on the top-right of the books table.
+
+Add Book 
+
+	There are two ways a book can be added.
+	
+	1) Add new book to Library:
+		
+		a) Click the "Add book" button near the top-left of the table
+		
+		b) Enter the title of the book in the "Title" text field
+		
+		c) Set the status to Available or Suspended on the "Status" dropdown (Default: Available)
+		
+		d) Click the "Add book" button on the modal window.
+	
+	2) Unsuspend temporarily suspended book
+		
+		a) Click the "Update book" button on the row of the book you wish to unsuspend
+		
+		b) Click the "Status" dropdown and select the new status for the book (E.g., "Available")
+		
+		c) (Optional) If checking out a previously unavailable book:
+		
+		ci) Add the name of the customer checking out the book to the "Book Holder" text field
+		
+		cii) Add the date checkout to the "Checkout Date" date field 
+		
+		d) (Optional) If putting a previously unavailable book on hold:
+		
+		di) Add the name of the customer checking out the book to the "Book Holder" text field
+		
+		e) Click the "Update book" button on the modal window.
+	
+
+Remove Book 
+
+There are two ways a book can be removed.
+	
+	1) Removed from circulation with record preserved:
+	
+		a) Click the "Update book" button on the row of the book you wish to remove
+		
+		b) Click the "Status" dropdown and select "Suspended (Permenantly)" on the dropdown
+		
+		c) Click the "Update book" button on the modal window.
+		
+		WARNING: Once a book is permenantly suspended, it can only be viewed or deleted from the library record.
+	
+	2) Deleted from library record
+		
+		a) Click the "Delete book" button on the row of the book you wish to permenantly delete
+		
+		WARNING: This action cannot be undone! The book will be gone forever.
+	
+
+Temporarily Suspend Book
+
+	Instructions:
+	
+		a) Click the "Update book" button on the row of the book you wish to suspend
+		
+		b) Click the "Status" dropdown and select "Suspended (Temporarily)" on the dropdown
+		
+		c) Click the "Update book" button on the modal window.
 
 
-0) Download the application and unzip it to where you want to host it.
-	0a) Ex: If you are using XAMPP, extract to your XAMPP installation's htdocs folder. 
-1) Ensure that PHP (7+) is installed and can be run from the command line.
-	1a) If you don't have PHP, download here: https://windows.php.net/download/
-2) Ensure that PHP is on your PATH
-	2a) In your windows search bar, type cmd.exe. Then click enter
-	2b) type "php -v" into the command prompt terminal. Ensure that the command window registers your php version as 7+
-3) Install a MySQL server
-	3a) If you are using XAMPP, make sure the server is started through the XAMPP control panel
-	3b) Otherwise, install using https://dev.mysql.com/downloads/mysql/?
-4) In the command window, navigate to ".../Library/app/database".
-	3a) If you use a XAMPP installation which is located at C:\XAMPP\htdocs to host the program; type: cd C:\xampp\htdocs\Library\app\database
-5) Type "php install.php" and click enter. 
-	5a) The command window should contain messages confirming the Library database and Books table are initialized.
-	5b) If you do not see initialization messages, ensure that you properly followed steps 1-4.
-6) In ".../Library/app/database/config.ini", change the user, pass and servername fields.
-	6a) The user and pass need to match those of a valid login for your MySQL database instance
-	6a) The defaults should match a default MySQL database instance hosted on your localhost.
-7) When you are ready to launch the application, make sure your server is running
-	7a) Ex: If you are using XAMPP, make sure the Apache module is running
-8) Open the website.
-	8a) The default URL if running on your local machine should be http://localhost/Library/app/ . 
-	8b) If the URL does not work, the website may be running on a different port. 
-		8bi)  Check to see that you are running on port:8000 
-		8bii) Alternatively, add the port to your URL (ex: localhost:8080/Library/app/)
+Check-Out (library customer borrows book)
+
+	Instructions:
+	
+		a) Click the "Update book" button on the row of the book you wish to check out
+		
+		b) Click the "Status" dropdown and select "Checked Out" on the dropdown
+		
+		c) Add the name of the customer checking out the book to the "Book Holder" text field
+		
+		d) Add the date checkout to the "Checkout Date" date field 
+		
+		e) Click the "Update book" button on the modal window.
+
+
+Check-In (library customer returns book)
+
+	Instructions:
+	
+		a) Click the "Update book" button on the row of the book you wish to check out
+		
+		b) Click the "Status" dropdown and select the new book status (E.g., Available) on the dropdown
+		
+		d) Click the "Update book" button on the modal window.
+
+		//TODO: FIX
+
+Add Hold (library customer places hold on book currently checked-out)
+
+	Instructions:
+	
+		a) Click the "Update book" button on the row of the book you wish to check out
+		
+		b) Click the "Status" dropdown and select "On Hold" on the dropdown
+		
+		c) Add the name of the customer holding the book to the "Book Holder" text field
+		
+		d) Click the "Update book" button on the modal window.
+
+
+Remove Hold (library customer cancels hold or checks-out held book)
+
+	Instructions:
+	
+		a) Click the "Update book" button on the row of the book you wish to check out
+		
+		b) Click the "Status" dropdown and select "On Hold" on the dropdown
+		
+		c) Add the name of the customer holding the book to the "Book Holder" text field
+		
+		d) Click the "Update book" button on the modal window.
+
+
+

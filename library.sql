@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2018 at 10:18 PM
+-- Generation Time: Jul 04, 2018 at 03:02 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -31,21 +31,22 @@ CREATE TABLE `books` (
   `title` varchar(50) NOT NULL,
   `date_check_out` date DEFAULT NULL,
   `book_holder` varchar(50) DEFAULT NULL,
-  `book_status` int(10) UNSIGNED DEFAULT NULL
+  `book_status` int(10) UNSIGNED DEFAULT NULL,
+  `book_owner` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `books`
 --
 
-INSERT INTO `books` (`id`, `title`, `date_check_out`, `book_holder`, `book_status`) VALUES
-(1, 'TestBook', '2018-06-30', 'Jane Doe', 1),
-(3, 'TestBook2', '2018-06-01', 'John Doe', 1),
-(5, 'TestDisabled', NULL, '', 4),
-(6, 'TestB4', '2018-06-23', 'ExampleHolder', 2),
-(15, 'TestBook5', NULL, '', 3),
-(16, 'TestBook6', NULL, '', 0),
-(17, 'Test7', NULL, NULL, 3);
+INSERT INTO `books` (`id`, `title`, `date_check_out`, `book_holder`, `book_status`, `book_owner`) VALUES
+(1, 'TestBook', '2018-06-30', 'Jane Doe', 1, NULL),
+(3, 'TestBook2', '2018-06-01', 'John Doe', 1, NULL),
+(5, 'TestDisabled', NULL, '', 4, NULL),
+(6, 'TestB4', '2018-06-23', 'ExampleHolder', 2, NULL),
+(15, 'TestBook5', NULL, '', 3, NULL),
+(16, 'TestBook6', NULL, '', 0, NULL),
+(17, 'Test7', NULL, NULL, 3, NULL);
 
 --
 -- Indexes for dumped tables

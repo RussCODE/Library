@@ -8,6 +8,8 @@ $scope.onLoad = function onLoad()
     document.getElementById("titleForm").value = $rootScope.getCookie("title");
     var holderForm = document.getElementById("holderName");
     holderForm.value = $rootScope.getCookie("holder").replace("NULL", "");
+    var ownerForm = document.getElementById("ownerName");
+    ownerForm.value = $rootScope.getCookie("owner").replace("NULL", "");
     var statusForm = document.getElementById("statusForm");
     statusForm.selectedIndex = $rootScope.getCookie("statusCode");
     var checkoutDate = document.getElementById("checkoutDate");
@@ -43,10 +45,11 @@ $scope.updateBook = function updateBook()
     //Index position on dropdown corresponds to status codes
     const status = document.getElementById("statusForm").selectedIndex;
     const holder = document.getElementById("holderName").value;
+    const owner = document.getElementById("ownerName").value;
     const checkoutDate = document.getElementById("checkoutDate").value;
     const id = $rootScope.getCookie("id");
 
-    var args = { "id": id, "title": title, "status": status, "holder" : holder, "day" : checkoutDate};
+    var args = { "id": id, "title": title, "status": status, "holder" : holder, "day" : checkoutDate, "owner" : owner};
     args = JSON.stringify(args);
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function ()

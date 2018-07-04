@@ -118,7 +118,8 @@ config(['$locationProvider', '$routeProvider', '$stateProvider', function($locat
             updateBtn = book.statusCode != 4 ? "<button id=" + btnId + " class='button button1'>Update Book</button>" : "";
             deleteBtn = "<button id=del" + btnId + " class='button button1'>Delete Book</button>";
             $rootScope.table.row.add([book.id, book.title, status, book.statusCode,
-                book.book_holder.replace("NULL", ""), book.date_check_out.replace("NULL", ""), updateBtn, deleteBtn]).draw(false);
+                book.book_holder.replace("NULL", ""),  book.book_holder.replace("NULL", ""),
+                book.date_check_out.replace("NULL", ""), updateBtn, deleteBtn]).draw(false);
 
             if (updateBtn !== "")
             {
@@ -168,7 +169,8 @@ config(['$locationProvider', '$routeProvider', '$stateProvider', function($locat
         document.cookie = "title" + "=" + bookInfo[1];
         document.cookie = "statusCode" + "=" + bookInfo[3];
         document.cookie = "holder" + "=" + bookInfo[4];
-        document.cookie = "timestamp" + "=" + bookInfo[5];
+        document.cookie = "owner" + "=" + bookInfo[5];
+        document.cookie = "timestamp" + "=" + bookInfo[6];
     }
 
     function getStatus(statusCode)
