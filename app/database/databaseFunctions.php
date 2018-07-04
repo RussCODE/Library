@@ -107,7 +107,7 @@ function addBook($title, $date_check_out, $book_holder, $book_owner, $book_statu
 {
 	$conn = createConn();
 	
-	$sql = "INSERT INTO Books (title, date_check_out, book_holder, book_owner, book_status) VALUES (?, ?, ?, ?)";
+	$sql = "INSERT INTO Books (title, date_check_out, book_holder, book_owner, book_status) VALUES (?, ?, ?, ?, ?)";
 	$statement = $conn->prepare($sql);
 	$statement->bind_param("ssssi", $title, $date_check_out, $book_holder, $book_owner, $book_status);
 	
@@ -130,7 +130,7 @@ function addBookRemote($args)
 	header("Content-Type: application/json; charset=UTF-8");
 	$args = json_decode($args, false);
 	$status = $args->status == "Suspended" ? 3 : 0;
-	addBook($args->title, NULL, NULL, $status);
+	addBook($args->title, NULL, NULL, NULL, $status);
 	
 }//end addBookRemote
 
